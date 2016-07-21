@@ -24,6 +24,12 @@ userSchema.pre('save', function(next) {
     });
 });
 
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+    bcrypt.compare(cadidatePassword, this.password, function(err, isMatch) {
+        if (err) { return callback(err); }
+    });
+}
+
 // Create the model class
 const ModelClass = mongoose.model('user', userSchema);
 
